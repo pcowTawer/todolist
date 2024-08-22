@@ -1,0 +1,1 @@
+java -cp h2-2.3.232.jar org.h2.tools.Server -pg -pgAllowOthers -pgPort 1521 -baseDir ./
