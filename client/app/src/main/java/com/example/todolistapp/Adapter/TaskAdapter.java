@@ -1,4 +1,4 @@
-package com.example.todolistapp.Adapter;
+package com.example.todolistapp.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,43 +6,42 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.todolistapp.MainActivity;
-import com.example.todolistapp.Model.ToDoModel;
+import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.R;
 
 import java.util.ArrayList;
-import java.util.List;
+public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
+    private ArrayList<TaskModel> taskList;
 
-public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
-    private List<ToDoModel> todoList = new ArrayList<>();
-    private MainActivity activity;
-
-    public ToDoAdapter(MainActivity activity) {
-        this.activity = activity;
+    public TaskAdapter(ArrayList<TaskModel> taskList) {
+        this.taskList = taskList;
     }
 
+    @NonNull
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.task_layout, parent, false);
         return new ViewHolder(itemView);
     }
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ToDoModel item = todoList.get(position);
+        TaskModel item = taskList.get(position);
         holder.title.setText(item.getTitle());
         holder.description.setText(item.getDescription());
         holder.todoCheckBox.setChecked(item.getCompleted());
     }
 
     public int getItemCount() {
-        return todoList.size();
+        return taskList.size();
     }
 
-    public void setTasks(List<ToDoModel> todoList) {
-        this.todoList = todoList;
+    public void setTasks(ArrayList<TaskModel> taskList) {
+        this.taskList = taskList;
         notifyDataSetChanged();
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         CheckBox todoCheckBox;
         TextView title;

@@ -1,9 +1,21 @@
-package com.example.todolistapp.Model;
+package com.example.todolistapp.model;
 
-public class ToDoModel {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class TaskModel {
+    @Expose
+    @SerializedName("id")
     private int id;
+    @Expose
+    @SerializedName("completed")
     private boolean completed;
-    private String title, description;
+    @Expose
+    @SerializedName("title")
+    private String title;
+    @Expose
+    @SerializedName("description")
+    private String description;
 
     public int getId() {
         return id;
