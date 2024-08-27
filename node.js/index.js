@@ -12,5 +12,6 @@ app.post('/tasks', db.createTask)
 app.put('/tasks/:id', db.updateTask)
 app.delete('/tasks/:id', db.deleteTask)
 app.listen(port, () => {
+  db.initialize();
   console.log(`App running on port ${port}.`)
 })

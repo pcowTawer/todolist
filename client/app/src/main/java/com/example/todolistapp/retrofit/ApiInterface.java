@@ -17,11 +17,11 @@ public interface ApiInterface {
     Call<ArrayList<TaskModel>> getTasks();
 
     @POST("tasks")
-    Call<String> addTask(@Body TaskModel task);
+    Call<Void> addTask(@Body TaskModel task);
 
     @PUT("tasks/{id}")
-    Call<String> updateTask(@Path("id") int id, @Body TaskModel task);
+    Call<Void> updateTask(@Path("id") int id, @Body TaskModel task);
 
     @DELETE("tasks/{id}")
-    Call<String> deleteTask(@Path("id") int id);
+    Call<Void> deleteTask(@Path("id") int id);
 }

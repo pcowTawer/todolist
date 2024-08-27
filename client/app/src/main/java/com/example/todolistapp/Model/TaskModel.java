@@ -8,14 +8,14 @@ public class TaskModel {
     @SerializedName("id")
     private int id;
     @Expose
-    @SerializedName("completed")
-    private boolean completed;
-    @Expose
     @SerializedName("title")
     private String title;
     @Expose
     @SerializedName("description")
     private String description;
+    @Expose
+    @SerializedName("completed")
+    private boolean completed;
 
     public int getId() {
         return id;

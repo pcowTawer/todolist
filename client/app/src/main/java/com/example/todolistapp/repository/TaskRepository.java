@@ -3,7 +3,6 @@ package com.example.todolistapp.repository;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.todolistapp.model.TaskModel;
@@ -29,16 +28,17 @@ public class TaskRepository {
         return taskRepository;
     }
 
-    public LiveData<ArrayList<TaskModel>> getTasks() {
+    public MutableLiveData<ArrayList<TaskModel>> getTasks() {
         myInterface.getTasks().enqueue(new Callback<ArrayList<TaskModel>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<TaskModel>> call, @NonNull Response<ArrayList<TaskModel>> response) {
+                Log.d("Response", "Get all tasks ");
                 taskListLiveData.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<TaskModel>> call, @NonNull Throwable throwable) {
-                taskListLiveData.postValue(null);
+                taskListLiveData.setValue(new ArrayList<>());
                 Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
             }
         });
@@ -46,39 +46,39 @@ public class TaskRepository {
     }
 
     public void addTask(TaskModel task) {
-        myInterface.addTask(task).enqueue(new Callback<String>() {
+        myInterface.addTask(task).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                Log.d("Response", "Add task with title: " + task.getTitle() );
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Log.d("Response", "Add task with title: " + task.getTitle());
             }
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
                 Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
             }
         });
     }
 
-    public void updateTask(int id, TaskModel task) {
-        myInterface.updateTask(id, task).enqueue(new Callback<String>() {
+    public void updateTask(int id, TaskModel newTask) {
+        myInterface.updateTask(id, newTask).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 Log.d("Response", "Update task with id: " + id );
             }
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
                 Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
             }
         });
     }
 
     public void deleteTask(int id) {
-        myInterface.deleteTask(id).enqueue(new Callback<String>() {
+        myInterface.deleteTask(id).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(@NonNull Call<String> call, @NonNull Response<String> response) {
-                Log.d("Response", "Delete task with id: " + id );
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                Log.d("Response", "Delete task with id:" + id );
             }
             @Override
-            public void onFailure(@NonNull Call<String> call, @NonNull Throwable throwable) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
                 Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
             }
         });
