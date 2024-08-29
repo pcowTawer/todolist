@@ -1,0 +1,19 @@
+services:
+  server:
+    build:
+      context: ./node.js
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: production
+    ports:
+      - 5000:5000
+  db:
+    image: pcow/h2-image
+    ports:
+      - 1521:1521
+    volumes:
+      - ./db/data:/opt/h2-data
+  client-builder:
+    image:  android-builder:latest
+    volumes:
+      - ./client/release_outputs:/app/release_outputs
