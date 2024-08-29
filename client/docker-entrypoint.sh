@@ -1,10 +1,12 @@
 #!/bin/bash
 
+
+chmod +x gradlew
+
 echo "Starting to create release"
 ./gradlew clean assembleRelease
 
-
-RELEASE_VERSION=$(date -Iminutes)
+RELEASE_VERSION=$(date -Iminutes)s
 echo "Release version is $RELEASE_VERSION"
 
 echo "Renaming release directory to release version"

@@ -1,6 +1,6 @@
 FROM adoptopenjdk:11-jre-hotspot
 
-ENV H2-DATA /opt/h2-data
+ENV H2_DATA /opt/h2-data
 ENV H2_ZIP https://github.com/h2database/h2database/releases/download/version-2.3.232/h2-2024-08-11.zip
 ENV H2_PORT 1521
 ENV DATABASE tasks
