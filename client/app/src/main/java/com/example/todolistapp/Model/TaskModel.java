@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 public class TaskModel {
     @Expose
     @SerializedName("id")
-    private int id;
+    private String id;
     @Expose
     @SerializedName("title")
     private String title;
@@ -17,11 +17,11 @@ public class TaskModel {
     @SerializedName("completed")
     private boolean completed;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -12,8 +12,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todolistapp.Adapter.TaskAdapter;
 import com.example.todolistapp.R;
-import com.example.todolistapp.adapter.TaskAdapter;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
     private final TaskAdapter taskAdapter;

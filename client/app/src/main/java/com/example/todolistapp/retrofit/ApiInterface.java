@@ -20,8 +20,8 @@ public interface ApiInterface {
     Call<Void> addTask(@Body TaskModel task);
 
     @PUT("tasks/{id}")
-    Call<Void> updateTask(@Path("id") int id, @Body TaskModel task);
+    Call<Void> updateTask(@Path("id") String id, @Body TaskModel task);
 
     @DELETE("tasks/{id}")
-    Call<Void> deleteTask(@Path("id") int id);
+    Call<Void> deleteTask(@Path("id") String id);
 }

@@ -58,7 +58,7 @@ public class TaskRepository {
         });
     }
 
-    public void updateTask(int id, TaskModel newTask) {
+    public void updateTask(String id, TaskModel newTask) {
         myInterface.updateTask(id, newTask).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
@@ -71,7 +71,7 @@ public class TaskRepository {
         });
     }
 
-    public void deleteTask(int id) {
+    public void deleteTask(String id) {
         myInterface.deleteTask(id).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {

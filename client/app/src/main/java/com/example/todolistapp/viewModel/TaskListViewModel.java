@@ -32,11 +32,11 @@ public class TaskListViewModel extends ViewModel {
         repository.addTask(task);
     }
 
-    public void updateTask(int id, TaskModel task) {
+    public void updateTask(String id, TaskModel task) {
         repository.updateTask(id, task);
     }
 
-    public void deleteTask(int position) {
+    public void deleteTask(String position) {
 
         repository.deleteTask(position);
         taskListLiveData = repository.getTasks();

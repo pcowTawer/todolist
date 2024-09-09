@@ -6,15 +6,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
-
 import com.example.todolistapp.R;
 import com.example.todolistapp.Adapter.TaskAdapter;
 import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.viewModel.TaskListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.parse.Parse;
-import com.parse.ParseObject;
 
 public class MainActivity extends AppCompatActivity implements NewTaskDialogListener, DeleteTaskDialogListener{
 
@@ -45,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements NewTaskDialogList
 
 
     @Override
-    public void handleUpdateTask(int id, TaskModel task) {
+    public void handleUpdateTask(String id, TaskModel task) {
         taskListViewModel.updateTask(id, task);
     }
 

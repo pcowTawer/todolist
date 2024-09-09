@@ -92,7 +92,7 @@ public class NewTaskDialog extends BottomSheetDialogFragment {
             NewTaskDialogListener activity = (NewTaskDialogListener) getActivity();
             assert activity != null;
             if (isUpdate) {
-                activity.handleUpdateTask(bundle.getInt("id"), task);
+                activity.handleUpdateTask(bundle.getString("id"), task);
             } else {
                 activity.handleAddTask(task);
             }

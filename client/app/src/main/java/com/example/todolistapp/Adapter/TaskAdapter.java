@@ -1,4 +1,4 @@
-package com.example.todolistapp.adapter;
+package com.example.todolistapp.Adapter;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -64,7 +64,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public void editItem(int position) {
         TaskModel item = taskList.get(position);
         Bundle bundle = new Bundle();
-        bundle.putInt("id", item.getId());
+        bundle.putString("id", item.getId());
         bundle.putString("title", item.getTitle());
         bundle.putString("description", item.getDescription());
         NewTaskDialog fragment = new NewTaskDialog();
