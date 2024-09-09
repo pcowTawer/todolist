@@ -64,14 +64,13 @@ public class TaskRepository {
     }
 
     public void updateTask(String id, TaskModel newTask) {
-        myInterface.updateTask(id, newTask).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Log.d("Response", "Update task with id: " + id );
-            }
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
-                Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Tasks");
+        query.getInBackground(id, (task, e) -> {
+            if (e == null) {
+                task.put("title", newTask.getTitle());
+                task.put("description", newTask.getDescription());
+                task.put("completed", newTask.getCompleted());
+                task.saveInBackground();
             }
         });
     }
