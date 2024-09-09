@@ -7,10 +7,10 @@ import androidx.lifecycle.ViewModel;
 import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.repository.TaskRepository;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TaskListViewModel extends ViewModel {
-    private MutableLiveData<ArrayList<TaskModel>> taskListLiveData;
+    private MutableLiveData<List<TaskModel>> taskListLiveData;
     private final TaskRepository repository;
 
     public TaskListViewModel() {
@@ -23,7 +23,7 @@ public class TaskListViewModel extends ViewModel {
         super.onCleared();
     }
 
-    public LiveData<ArrayList<TaskModel>> getTaskListLiveData() {
+    public LiveData<List<TaskModel>> getTaskListLiveData() {
         taskListLiveData = repository.getTasks();
         return taskListLiveData;
     }

@@ -12,6 +12,8 @@ import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.viewModel.TaskListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity implements NewTaskDialogListener, DeleteTaskDialogListener{
 
     private TaskListViewModel taskListViewModel;
@@ -25,17 +27,15 @@ public class MainActivity extends AppCompatActivity implements NewTaskDialogList
         taskListViewModel = new ViewModelProvider(this).get(TaskListViewModel.class);
         taskAdapter = new TaskAdapter(this, taskListViewModel);
         tasksRecyclerView.setAdapter(taskAdapter);
-        taskListViewModel.getTaskListLiveData().observe(this, taskList -> taskAdapter.setTasks(taskList));
+        taskListViewModel.getTaskListLiveData().observe(this, taskList -> taskAdapter.setTasks((ArrayList<TaskModel>) taskList));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(this, taskAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
 
         FloatingActionButton floatingActionButton = findViewById(R.id.addNewTaskButton);
 
-        floatingActionButton.setOnClickListener(v -> {
-                NewTaskDialog.getInstance().show(getSupportFragmentManager(),
-                NewTaskDialog.TAG);
-        });
+        floatingActionButton.setOnClickListener(v -> NewTaskDialog.getInstance().show(getSupportFragmentManager(),
+        NewTaskDialog.TAG));
 
     }
 
