@@ -8,8 +8,6 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.retrofit.ApiInterface;
 import com.example.todolistapp.retrofit.RetrofitService;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -52,14 +50,15 @@ public class TaskRepository {
     }
 
     public void addTask(TaskModel task) {
-        myInterface.addTask(task).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Log.d("Response", "Add task with title: " + task.getTitle());
-            }
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
-                Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
+        ParseObject taskParseObject = new ParseObject("Tasks");
+        taskParseObject.put("title", task.getTitle());
+        taskParseObject.put("description", task.getDescription());
+        taskParseObject.put("completed", task.getCompleted());
+        taskParseObject.saveInBackground(e -> {
+            if (e == null) {
+                Log.d("Response", "Task saved");
+            } else {
+                Log.d("Response failure", Objects.requireNonNull(e.getLocalizedMessage()));
             }
         });
     }
