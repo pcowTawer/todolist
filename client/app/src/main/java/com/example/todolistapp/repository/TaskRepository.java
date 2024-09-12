@@ -68,7 +68,8 @@ public class TaskRepository {
         });
     }
 
-    public void deleteTask(String id) {
-
+    public void deleteTask(String id, RepositoryCallback callback) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Tasks");
+        query.getInBackground(id, (task, e) -> task.deleteInBackground(e1 -> getTasks(callback)));
     }
 }

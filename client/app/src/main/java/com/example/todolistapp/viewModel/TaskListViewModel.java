@@ -37,7 +37,7 @@ public class TaskListViewModel extends ViewModel {
         repository.updateTask(id, task, taskListLiveData::setValue);
     }
 
-    public void deleteTask(String position) {
-
+    public void deleteTask(String id) {
+        repository.deleteTask(id, taskListLiveData::setValue);
     }
 }

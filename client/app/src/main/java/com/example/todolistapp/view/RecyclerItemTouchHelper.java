@@ -38,7 +38,6 @@ public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {
             builder.setCancelable(false);
             builder.setMessage("Are you sure you want to delete this task?");
             builder.setPositiveButton(android.R.string.yes, (dialog, which) -> taskAdapter.deleteItem(position));
-            builder.setOnDismissListener(dialog -> ((DeleteTaskDialogListener) activity).handeDeleteTaskDialogClose());
             builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> taskAdapter.notifyItemChanged(viewHolder.getAdapterPosition()));
             AlertDialog dialog = builder.create();
             dialog.show();
