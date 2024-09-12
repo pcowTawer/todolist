@@ -99,12 +99,4 @@ public class NewTaskDialog extends BottomSheetDialogFragment {
             dismiss();
         });
     }
-
-    @Override
-    public void onDismiss(@NonNull DialogInterface dialog) {
-        super.onDismiss(dialog);
-        NewTaskDialogListener activity = (NewTaskDialogListener) getActivity();
-        assert activity != null;
-        activity.handleNewTaskDialogDismiss();
-    }
 }

@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import com.example.todolistapp.R;
-import com.example.todolistapp.Adapter.TaskAdapter;
+import com.example.todolistapp.adapter.TaskAdapter;
 import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.viewModel.TaskListViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements NewTaskDialogListener, DeleteTaskDialogListener{
+public class MainActivity extends AppCompatActivity implements NewTaskDialogListener{
 
     private TaskListViewModel taskListViewModel;
     private TaskAdapter taskAdapter;
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements NewTaskDialogList
         taskListViewModel = new ViewModelProvider(this).get(TaskListViewModel.class);
         taskAdapter = new TaskAdapter(this, taskListViewModel);
         tasksRecyclerView.setAdapter(taskAdapter);
-        taskListViewModel.getTaskListLiveData().observe(this, taskList -> taskAdapter.setTasks((ArrayList<TaskModel>) taskList));
+        taskListViewModel.taskListLiveData.observe(this, taskList -> taskAdapter.setTasks((ArrayList<TaskModel>) taskList));
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerItemTouchHelper(this, taskAdapter));
         itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
@@ -48,17 +48,5 @@ public class MainActivity extends AppCompatActivity implements NewTaskDialogList
     @Override
     public void handleAddTask(TaskModel task) {
         taskListViewModel.addTask(task);
-    }
-
-    @Override
-    public void handleNewTaskDialogDismiss() {
-        taskListViewModel.getTaskListLiveData();
-        taskAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void handeDeleteTaskDialogClose() {
-        taskListViewModel.getTaskListLiveData();
-        taskAdapter.notifyDataSetChanged();
     }
 }

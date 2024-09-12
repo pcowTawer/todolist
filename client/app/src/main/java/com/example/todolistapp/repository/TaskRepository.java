@@ -2,12 +2,8 @@ package com.example.todolistapp.repository;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.todolistapp.model.TaskModel;
-import com.example.todolistapp.retrofit.ApiInterface;
-import com.example.todolistapp.retrofit.RetrofitService;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
@@ -15,13 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class TaskRepository {
-    private static final ApiInterface myInterface = RetrofitService.getApiInterface();
-    private final MutableLiveData<List<TaskModel>> taskListLiveData = new MutableLiveData<>();
     private static TaskRepository taskRepository;
 
     public static TaskRepository getInstance(){
@@ -31,7 +22,7 @@ public class TaskRepository {
         return taskRepository;
     }
 
-    public MutableLiveData<List<TaskModel>> getTasks() {
+    public void getTasks(RepositoryCallback callback) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Tasks");
         query.whereExists("title");
         query.findInBackground((objects, e) -> {
@@ -44,9 +35,8 @@ public class TaskRepository {
                 task.setId(object.getObjectId());
                 taskList.add(task);
             }
-            taskListLiveData.setValue(taskList);
+            callback.onComplete(taskList);
         });
-        return taskListLiveData;
     }
 
     public void addTask(TaskModel task) {
@@ -76,15 +66,6 @@ public class TaskRepository {
     }
 
     public void deleteTask(String id) {
-        myInterface.deleteTask(id).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
-                Log.d("Response", "Delete task with id:" + id );
-            }
-            @Override
-            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
-                Log.d("Response failure", Objects.requireNonNull(throwable.getMessage()));
-            }
-        });
+
     }
 }

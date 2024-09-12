@@ -1,18 +1,17 @@
-package com.example.todolistapp.Adapter;
+package com.example.todolistapp.adapter;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.R;
+import com.example.todolistapp.model.TaskModel;
 import com.example.todolistapp.view.MainActivity;
 import com.example.todolistapp.view.NewTaskDialog;
 import com.example.todolistapp.viewModel.TaskListViewModel;
