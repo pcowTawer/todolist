@@ -30,11 +30,11 @@ public class TaskListViewModel extends ViewModel {
     }
 
     public void addTask(TaskModel task) {
-
+        repository.addTask(task, taskListLiveData::setValue);
     }
 
     public void updateTask(String id, TaskModel task) {
-
+        repository.updateTask(id, task, taskListLiveData::setValue);
     }
 
     public void deleteTask(String position) {

@@ -39,28 +39,31 @@ public class TaskRepository {
         });
     }
 
-    public void addTask(TaskModel task) {
+    public void addTask(TaskModel task, RepositoryCallback callback) {
         ParseObject taskParseObject = new ParseObject("Tasks");
         taskParseObject.put("title", task.getTitle());
         taskParseObject.put("description", task.getDescription());
         taskParseObject.put("completed", task.getCompleted());
         taskParseObject.saveInBackground(e -> {
             if (e == null) {
-                Log.d("Response", "Task saved");
+                getTasks(callback);
             } else {
                 Log.d("Response failure", Objects.requireNonNull(e.getLocalizedMessage()));
             }
         });
+
     }
 
-    public void updateTask(String id, TaskModel newTask) {
+    public void updateTask(String id, TaskModel newTask, RepositoryCallback callback) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Tasks");
         query.getInBackground(id, (task, e) -> {
             if (e == null) {
                 task.put("title", newTask.getTitle());
                 task.put("description", newTask.getDescription());
                 task.put("completed", newTask.getCompleted());
-                task.saveInBackground();
+                task.saveInBackground(e1 -> {
+                    if (e1 == null) getTasks(callback);
+                });
             }
         });
     }
