@@ -1,23 +1,24 @@
 services:
-  mongo:
+  mongo-dev:
     image: 'mongo:latest'
+    container_name: mongo-dev
     # volumes:
     #   - './data/db:/data/db'
     ports:
       - 27017:27017
-  parse:
+  parse-dev:
     image: 'parseplatform/parse-server:latest'
     environment:
       - PARSE_SERVER_APPLICATION_ID=APPLICATION_ID
       - PARSE_SERVER_MASTER_KEY=MASTER_KEY
-      - PARSE_SERVER_DATABASE_URI=mongodb://mongo:27017/parse
+      - PARSE_SERVER_DATABASE_URI=mongodb://mongo-dev:27017/parse
       # - PARSE_SERVER_MOUNT_PATH=/parse
     ports:
       - '1337:1337'
     links:
-      - mongo
+      - mongo-dev
   parse-dashboard:
-    image: 'parseplatform/parse-dashboard'
+    image: 'parseplatform/parse-dashboard:latest'
     ports:
       - '4040:4040'
     environment:

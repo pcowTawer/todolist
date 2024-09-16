@@ -1,0 +1,21 @@
+services:
+  mongo:
+    image: 'mongo:latest'
+    container_name: mongo-prod
+    command: mongod --port 27018
+    # volumes:
+    #   - './data/db:/data/db'
+    ports:
+      - 27018:27018
+  parse:
+    image: 'parseplatform/parse-server:latest'
+    environment:
+      - PARSE_SERVER_APPLICATION_ID=APPLICATION_ID
+      - PARSE_SERVER_MASTER_KEY=MASTER_KEY
+      - PARSE_SERVER_DATABASE_URI=mongodb://mongo:27018/parse
+      - PORT=1338
+      # - PARSE_SERVER_MOUNT_PATH=/parse
+    ports:
+      - '1338:1338'
+    links:
+      - mongo
