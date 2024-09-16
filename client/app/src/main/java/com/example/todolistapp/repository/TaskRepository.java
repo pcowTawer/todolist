@@ -27,7 +27,7 @@ public class TaskRepository {
         query.whereExists("title");
         query.findInBackground((objects, e) -> {
             List<TaskModel> taskList = new ArrayList<>();
-            for (ParseObject object: objects) {
+            if (objects != null) for (ParseObject object: objects) {
                 TaskModel task = new TaskModel();
                 task.setTitle(object.getString("title"));
                 task.setDescription(object.getString("description"));
