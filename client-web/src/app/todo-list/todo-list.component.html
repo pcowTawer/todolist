@@ -1,3 +1,5 @@
 <section class="results">
-    <app-todo-item [task]="task"></app-todo-item>
+    @for (task of tasks; track task.id) {
+        <app-todo-item [task]="task"></app-todo-item>
+    }
 </section>

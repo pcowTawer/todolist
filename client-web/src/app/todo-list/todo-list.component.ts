@@ -9,10 +9,24 @@ import { Task } from '../task';
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent {
-  task: Task = {
-    'id': '1',
-    'title': 'My first task',
-    'description': 'My first task description',
-    'completed': true
-  };
+  tasks: Task[] = [
+    {
+      'id': '1',
+      'title': 'My first task',
+      'description': 'My first task description',
+      'completed': true
+    },
+    {
+      'id': '2',
+      'title': 'My second task',
+      'description': 'My second task description',
+      'completed': true
+    },
+    {
+      'id': '3',
+      'title': 'My third task',
+      'description': 'My third task description',
+      'completed': true
+    },
+  ]
 }
