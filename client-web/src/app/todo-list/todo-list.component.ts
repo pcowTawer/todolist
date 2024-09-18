@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TodoItemComponent } from "../todo-item/todo-item.component";
 import { Task } from '../task';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-todo-list',
@@ -11,6 +12,15 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent {
+  
+  taskService = inject(TaskService);
+
+  tasks: Task[] = [];
+
+  constructor () {
+    this.tasks = this.taskService.getTasks();
+  }
+  
   taskForm = new FormGroup({
     title: new FormControl('', Validators.required),
     description: new FormControl(''),
@@ -24,25 +34,4 @@ export class TodoListComponent {
       'completed': false
     } as Task)
   }
-
-  tasks: Task[] = [
-    {
-      'id': '1',
-      'title': 'My first task',
-      'description': 'My first task description',
-      'completed': true
-    },
-    {
-      'id': '2',
-      'title': 'My second task',
-      'description': 'My second task description',
-      'completed': true
-    },
-    {
-      'id': '3',
-      'title': 'My third task',
-      'description': 'My third task description',
-      'completed': true
-    },
-  ]
 }
