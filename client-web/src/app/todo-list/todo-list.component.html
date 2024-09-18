@@ -1,3 +1,16 @@
+<section>
+    <form [formGroup]="taskForm" (ngSubmit)="handleSubmit()">
+        <label>
+            Название новой задачи
+            <input type="text" formControlName="title" />
+        </label>
+        <label>
+            Описание новой задачи:
+            <input type="text" formControlName="description" />
+        </label>
+        <button type="submit">Создать новую задачу</button>
+    </form>
+</section>
 <section class="results">
     @for (task of tasks; track task.id) {
         <app-todo-item [task]="task"></app-todo-item>
