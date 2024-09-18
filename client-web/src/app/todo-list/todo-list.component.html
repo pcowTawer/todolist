@@ -8,7 +8,7 @@
             Описание новой задачи:
             <input type="text" formControlName="description" />
         </label>
-        <button type="submit">Создать новую задачу</button>
+        <button type="submit" [disabled]="!taskForm.valid">Создать новую задачу</button>
     </form>
 </section>
 <section class="results">

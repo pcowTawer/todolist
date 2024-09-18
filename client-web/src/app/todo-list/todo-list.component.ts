@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TodoItemComponent } from "../todo-item/todo-item.component";
 import { Task } from '../task';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class TodoListComponent {
   taskForm = new FormGroup({
-    title: new FormControl(''),
+    title: new FormControl('', Validators.required),
     description: new FormControl(''),
   });
 
@@ -24,7 +24,7 @@ export class TodoListComponent {
       'completed': false
     } as Task)
   }
-  
+
   tasks: Task[] = [
     {
       'id': '1',
