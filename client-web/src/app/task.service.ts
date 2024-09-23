@@ -12,13 +12,13 @@ export class TaskService {
   async getTasks(): Promise<Task[]> {
     try {
       const query = new Parse.Query("Tasks");
-      const response = await query.find();
-      this.tasks = response.map((object) => {
+      const taskObjects = await query.find();
+      this.tasks = taskObjects.map((taskObject) => {
         return {
-          id: object.get('id'),
-          title: object.get('title'),
-          description: object.get('description') ?? '',
-          completed: object.get('completed') ?? ''
+          id: taskObject.id,
+          title: taskObject.get('title'),
+          description: taskObject.get('description') ?? '',
+          completed: taskObject.get('completed') ?? ''
         } as Task
       })
       return this.tasks ?? []
@@ -39,7 +39,7 @@ export class TaskService {
     taskParseObject.set("completed", false);
     return taskParseObject.save().then((taskParseObject) => {
       return {
-        id: taskParseObject.get('id'),
+        id: taskParseObject.id,
         title: taskParseObject.get('title'),
         description: taskParseObject.get('description'),
         completed: taskParseObject.get('completed'),
