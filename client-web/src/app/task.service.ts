@@ -9,6 +9,8 @@ export class TaskService {
 
   private tasks: Task[] = [];
 
+  constructor() { }
+
   async getTasks(): Promise<Task[]> {
     try {
       const query = new Parse.Query("Tasks");
@@ -47,5 +49,18 @@ export class TaskService {
     })
     
   }
-  constructor() { }
+
+  async deleteTask(id: string) : Promise<Task | void> {
+      const Tasks = Parse.Object.extend("Tasks");
+      const query = new Parse.Query(Tasks);
+      return await query.get(id)
+      .then((task) => {
+        task.destroy()
+        .then((deletedTask) => {
+          return deletedTask
+        })
+      })
+  }
+
+
 }

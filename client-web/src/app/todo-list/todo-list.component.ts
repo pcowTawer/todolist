@@ -30,4 +30,10 @@ export class TodoListComponent {
     const newTask = await this.taskService.addTask(title, description);
     this.tasks.push(newTask)
   }
+
+  async handleDelete(id: string) {
+    await this.taskService.deleteTask(id)
+    const newTasks = this.tasks.filter((task) => task.id !== id);
+    this.tasks = newTasks
+  }
 }
