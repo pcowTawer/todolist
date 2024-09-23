@@ -26,7 +26,8 @@ export class TodoListComponent {
     description: new FormControl(''),
   });
 
-  handleSubmit(title : string, description : string) {
-    this.taskService.addTask(title, description);
+  async handleSubmit(title : string, description : string) {
+    const newTask = await this.taskService.addTask(title, description);
+    this.tasks.push(newTask)
   }
 }

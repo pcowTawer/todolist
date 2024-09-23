@@ -32,18 +32,19 @@ export class TaskService {
     return this.tasks.find((task) => task.id === id)
   }
 
-  addTask(title: string, description: string): void {
-    try {
-      const taskParseObject = new Parse.Object("Tasks");
-      taskParseObject.set("title", title);
-      taskParseObject.set("description", description);
-      taskParseObject.set("completed", false);
-      taskParseObject.save().then(() => {
-        console.log("Task added succesfully")
-      })
-    } catch (error) {
-      console.log(error)
-    }
+  async addTask(title: string, description: string): Promise<Task> {
+    const taskParseObject = new Parse.Object("Tasks");
+    taskParseObject.set("title", title);
+    taskParseObject.set("description", description);
+    taskParseObject.set("completed", false);
+    return taskParseObject.save().then((taskParseObject) => {
+      return {
+        id: taskParseObject.get('id'),
+        title: taskParseObject.get('title'),
+        description: taskParseObject.get('description'),
+        completed: taskParseObject.get('completed'),
+      } as Task
+    })
     
   }
   constructor() { }
