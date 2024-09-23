@@ -1,38 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Task } from './task';
 import Parse from 'parse';
+import { Task } from './task';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  private tasks: Task[] = [
-    {
-      'id': '1',
-      'title': 'My first task',
-      'description': 'My first task description',
-      'completed': true
-    },
-    {
-      'id': '2',
-      'title': 'My second task',
-      'description': 'My second task description',
-      'completed': true
-    },
-    {
-      'id': '3',
-      'title': 'My third task',
-      'description': 'My third task description',
-      'completed': true
-    },
-  ]
+  private tasks: Task[] = [];
 
-  getTasks(): Task[] {
-    return this.tasks;
+  async getTasks(): Promise<Task[]> {
+    try {
+      const query = new Parse.Query("Tasks");
+      const response = await query.find();
+      this.tasks = response.map((object) => {
+        return {
+          id: object.get('id'),
+          title: object.get('title'),
+          description: object.get('description') ?? '',
+          completed: object.get('completed') ?? ''
+        } as Task
+      })
+      return this.tasks ?? []
+    } catch (error) {
+      console.log(error);
+      return []
+    }
   }
 
-  getTask(id: string) {
+  getTask(id: string) : Task | undefined {
     return this.tasks.find((task) => task.id === id)
   }
 

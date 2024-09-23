@@ -17,8 +17,8 @@ export class TodoListComponent {
 
   tasks: Task[] = [];
 
-  constructor () {
-    this.tasks = this.taskService.getTasks();
+  async ngOnInit() {
+    this.tasks = await this.taskService.getTasks();
   }
   
   taskForm = new FormGroup({
