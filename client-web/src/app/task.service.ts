@@ -20,7 +20,7 @@ export class TaskService {
           id: taskObject.id,
           title: taskObject.get('title'),
           description: taskObject.get('description') ?? '',
-          completed: taskObject.get('completed') ?? ''
+          completed: taskObject.get('completed') ?? false
         } as Task
       })
       return this.tasks ?? []
