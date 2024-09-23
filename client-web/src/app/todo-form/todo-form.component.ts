@@ -13,6 +13,8 @@ export class TodoFormComponent {
 
   route: ActivatedRoute = inject(ActivatedRoute);
   taskId = '';
+  
+
   constructor() {
       this.taskId = this.route.snapshot.params['id'];
   }
@@ -22,7 +24,7 @@ export class TodoFormComponent {
     description: new FormControl(''),
   });
 
-  async handleSubmit(title : string, description : string) {
-    
+  async handleSubmit() {
+
   }
 }

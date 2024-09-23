@@ -1,7 +1,7 @@
 <section>
     <form 
     [formGroup]="taskForm" 
-    (ngSubmit)="handleSubmit(taskForm.value.title!, taskForm.value.description ?? '')">
+    (ngSubmit)="handleSubmit()">
         <label>
             Название новой задачи
             <input type="text" formControlName="title" />
