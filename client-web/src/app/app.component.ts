@@ -9,6 +9,7 @@ import Parse from 'parse';
   imports: [RouterOutlet, TodoListComponent],
   template: `
     <app-todo-list></app-todo-list>
+    <router-outlet />
   `,
   styleUrls: [`./app.component.css`],
 })
