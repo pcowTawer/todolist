@@ -12,6 +12,7 @@ services:
       - PARSE_SERVER_APPLICATION_ID=APPLICATION_ID
       - PARSE_SERVER_MASTER_KEY=MASTER_KEY
       - PARSE_SERVER_DATABASE_URI=mongodb://mongo-dev:27017/parse
+      - PARSE_SERVER_MASTER_KEY_IPS=0.0.0.0/0,::/0
       # - PARSE_SERVER_MOUNT_PATH=/parse
     ports:
       - '1337:1337'
@@ -23,11 +24,11 @@ services:
       - '4040:4040'
     environment:
       - PARSE_DASHBOARD_ALLOW_INSECURE_HTTP=true
-      - PARSE_DASHBOARD_SERVER_URL=/api
+      - PARSE_DASHBOARD_SERVER_URL=http://localhost:1337/parse
       - PARSE_DASHBOARD_MASTER_KEY=MASTER_KEY
       - PARSE_DASHBOARD_APP_ID=APPLICATION_ID
       - PARSE_DASHBOARD_APP_NAME=TodoListAppDev
-      - PARSE_DASHBOARD_USER_ID=admin
-      - PARSE_DASHBOARD_USER_PASSWORD=ADMIN_PASSWORD
+      - PARSE_DASHBOARD_USER_ID=a
+      - PARSE_DASHBOARD_USER_PASSWORD=a
       # - MOUNT_PATH=/dashboard/
-    
+    command: parse-dashboard --dev
