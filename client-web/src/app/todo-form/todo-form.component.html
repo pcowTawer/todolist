@@ -1,0 +1,15 @@
+<section>
+    <form 
+    [formGroup]="taskForm" 
+    (ngSubmit)="handleSubmit(taskForm.value.title!, taskForm.value.description ?? '')">
+        <label>
+            Название новой задачи
+            <input type="text" formControlName="title" />
+        </label>
+        <label>
+            Описание новой задачи:
+            <input type="text" formControlName="description" />
+        </label>
+        <button type="submit" [disabled]="!taskForm.valid">Создать новую задачу</button>
+    </form>
+</section>

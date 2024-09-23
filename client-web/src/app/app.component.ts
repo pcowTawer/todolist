@@ -2,13 +2,15 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import Parse from 'parse';
+import { TodoFormComponent } from "./todo-form/todo-form.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TodoListComponent],
+  imports: [RouterOutlet, TodoListComponent, TodoFormComponent],
   template: `
-    <app-todo-list></app-todo-list>
+    <!-- <app-todo-list></app-todo-list> -->
+     <app-todo-form></app-todo-form>
     <router-outlet />
   `,
   styleUrls: [`./app.component.css`],
