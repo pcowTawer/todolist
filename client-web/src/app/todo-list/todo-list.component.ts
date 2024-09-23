@@ -27,11 +27,6 @@ export class TodoListComponent {
   });
 
   handleSubmit() {
-    this.tasks.push({
-      'id': (Math.random() + 1).toString(36).substring(7),
-      'title': this.taskForm.value.title ?? '',
-      'description': this.taskForm.value.description ?? '',
-      'completed': false
-    } as Task)
+    this.taskService.addTask();
   }
 }
