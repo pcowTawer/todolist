@@ -1,0 +1,6 @@
+<section class="task">
+    <h2 class="task-title">{{ task.title }}</h2>
+    <p class="task-description">{{ task.description }}</p>
+    <label for="task-completed">Выполнен: </label>
+    <input id="task-completed" type="checkbox" [checked]="task.completed">
+</section>
