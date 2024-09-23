@@ -9,7 +9,6 @@ import { TodoFormComponent } from "./todo-form/todo-form.component";
   standalone: true,
   imports: [RouterOutlet, TodoListComponent, TodoFormComponent],
   template: `
-    <app-todo-list></app-todo-list>
     <router-outlet />
   `,
   styleUrls: [`./app.component.css`],

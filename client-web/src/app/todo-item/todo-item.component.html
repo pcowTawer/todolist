@@ -7,4 +7,7 @@
         [checked]="task.completed">
     </section>
     <button type="button" (click)="handleDelete()">Удалить</button>
+    <a [routerLink]="['/tasks/' + task.id]" >
+        <button type="button">Изменить</button>
+    </a>
 </section>
