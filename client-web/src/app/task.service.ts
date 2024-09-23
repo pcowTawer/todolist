@@ -32,13 +32,13 @@ export class TaskService {
     return this.tasks.find((task) => task.id === id)
   }
 
-  addTask(): void {
+  addTask(title: string, description: string): void {
     try {
-      const task = new Parse.Object("Tasks");
-      task.set("title", "TaskTitle");
-      task.set("description", "TaskDesctiption");
-      task.set("completed", true);
-      task.save().then(() => {
+      const taskParseObject = new Parse.Object("Tasks");
+      taskParseObject.set("title", title);
+      taskParseObject.set("description", description);
+      taskParseObject.set("completed", false);
+      taskParseObject.save().then(() => {
         console.log("Task added succesfully")
       })
     } catch (error) {
