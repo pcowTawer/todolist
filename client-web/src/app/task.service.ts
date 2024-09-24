@@ -39,7 +39,8 @@ export class TaskService {
     taskParseObject.set("title", title);
     taskParseObject.set("description", description);
     taskParseObject.set("completed", false);
-    return taskParseObject.save().then((taskParseObject) => {
+    return taskParseObject.save()
+    .then((taskParseObject) => {
       return {
         id: taskParseObject.id,
         title: taskParseObject.get('title'),
@@ -56,11 +57,9 @@ export class TaskService {
       return await query.get(id)
       .then((task) => {
         task.destroy()
-        .then((deletedTask) => {
-          return deletedTask
-        })
+      })
+      .then((deletedTask) => {
+        return deletedTask
       })
   }
-
-
 }
