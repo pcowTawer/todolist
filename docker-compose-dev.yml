@@ -33,3 +33,9 @@ services:
       - PARSE_DASHBOARD_USER_PASSWORD=a
       # - MOUNT_PATH=/dashboard/
     command: parse-dashboard --dev
+  client-web-dev:
+    build:
+      context: ./client-web
+      dockerfile: ./Dockerfile
+    ports:
+      - 4200:4200
