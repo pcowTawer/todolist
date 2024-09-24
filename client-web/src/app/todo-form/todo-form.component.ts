@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TaskService } from '../task.service';
+import { Task } from '../task';
 
 @Component({
   selector: 'app-todo-form',
@@ -12,6 +13,8 @@ import { TaskService } from '../task.service';
 })
 export class TodoFormComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
+  router: Router = inject(Router)
+
   taskService = inject(TaskService)
 
   taskId = ''
@@ -29,6 +32,12 @@ export class TodoFormComponent {
     })
   }
   async handleSubmit() {
-    
+    await this.taskService.updateTask(this.taskId, {
+      title : this.taskForm.value.title ?? '',
+      description : this.taskForm.value.description ?? ''
+    } as Task)
+    .then(() => {
+      this.router.navigate(['/']);
+    })
   }
 }

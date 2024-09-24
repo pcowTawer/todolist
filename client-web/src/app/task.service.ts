@@ -40,26 +40,38 @@ export class TaskService {
     taskParseObject.set("description", description);
     taskParseObject.set("completed", false);
     return taskParseObject.save()
-    .then((taskParseObject) => {
-      return {
-        id: taskParseObject.id,
-        title: taskParseObject.get('title'),
-        description: taskParseObject.get('description'),
-        completed: taskParseObject.get('completed'),
-      } as Task
-    })
-    
+      .then((taskParseObject) => {
+        return {
+          id: taskParseObject.id,
+          title: taskParseObject.get('title'),
+          description: taskParseObject.get('description'),
+          completed: taskParseObject.get('completed'),
+        } as Task
+      })
+
   }
 
-  async deleteTask(id: string) : Promise<Task | void> {
-      const Tasks = Parse.Object.extend("Tasks");
-      const query = new Parse.Query(Tasks);
-      return await query.get(id)
+  async deleteTask(id: string): Promise<Task | void> {
+    const Tasks = Parse.Object.extend("Tasks");
+    const query = new Parse.Query(Tasks);
+    return await query.get(id)
       .then((task) => {
         task.destroy()
       })
       .then((deletedTask) => {
         return deletedTask
+      })
+  }
+
+  async updateTask(id: string, newTask: Task): Promise<Task | void> {
+    const Tasks = Parse.Object.extend("Tasks");
+    const query = new Parse.Query(Tasks);
+    return await query.get(id)
+      .then((task) => {
+        task.set("title", newTask.title);
+        task.set("description", newTask.description);
+        task.set("completed", false);
+        task.save()
       })
   }
 }
