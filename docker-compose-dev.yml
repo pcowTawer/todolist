@@ -2,8 +2,8 @@ services:
   mongo-dev:
     image: 'mongo:latest'
     container_name: mongo-dev
-    # volumes:
-    #   - './data/db:/data/db'
+    volumes:
+      - './data/db:/data/db'
     ports:
       - 27017:27017
   parse-dev:
@@ -13,6 +13,7 @@ services:
       - PARSE_SERVER_MASTER_KEY=MASTER_KEY
       - PARSE_SERVER_DATABASE_URI=mongodb://mongo-dev:27017/parse
       - PARSE_SERVER_MASTER_KEY_IPS=0.0.0.0/0,::/0
+      - PARSE_SERVER_ALLOW_CLIENT_CLASS_CREATION=true
       # - PARSE_SERVER_MOUNT_PATH=/parse
     ports:
       - '1337:1337'
