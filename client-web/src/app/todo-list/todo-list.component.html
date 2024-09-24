@@ -15,6 +15,6 @@
 </section>
 <section class="results">
     @for (task of tasks; track task.id) {
-        <app-todo-item [task]="task" (deleteItemEvent)="handleDelete($event)"></app-todo-item>
+        <app-todo-item [task]="task" (deleteItemEvent)="handleDelete($event)" ></app-todo-item>
     }
 </section>

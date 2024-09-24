@@ -4,7 +4,7 @@
         <p class="task-description">{{ task.description }}</p>
         <label for="task-completed">Выполнен: </label>
         <input id="task-completed" type="checkbox"
-        [checked]="task.completed">
+        [checked]="task.completed" (change)="handleCheckboxChange()">
     </section>
     <button type="button" (click)="handleDelete()">Удалить</button>
     <a [routerLink]="['/tasks/' + task.id]"  >

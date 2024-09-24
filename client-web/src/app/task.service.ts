@@ -70,7 +70,7 @@ export class TaskService {
       .then((task) => {
         task.set("title", newTask.title);
         task.set("description", newTask.description);
-        task.set("completed", false);
+        task.set("completed", newTask.completed ?? false);
         task.save()
       })
   }
